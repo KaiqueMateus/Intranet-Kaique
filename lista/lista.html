@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet Álamo</title>
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;800&display=swap" rel="stylesheet">
+  
+    <!-- Estilos -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Scripts (jQuery não pode ser o slim que vem do Boostrap) -->
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
+    <!-- Progress Bar -->
+    <script src="js/progressbar.min.js"></script>
+    <!-- Parallax -->
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+    <link rel="stylesheet" href="./css/lista.css">
+</head>
+<body>
+  <header>
+    <div class="container" id="nav-container">
+      <!-- add essa class -->
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a class="navbar-brand" href="/index.html">
+          <img id="logo" src="./img/logolading.png" alt="Logo-alamo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" id="home-menu" href="#"></a>  
+
+            <div class="dropdown">
+              <button class="btn custom-dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sistemas
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://app.powercrm.com.br/" target="_blank">PowerCrm</a>
+                <a class="dropdown-item" href="https://urano.hinova.com.br/sga/sgav4_alamo/v5/login.php" target="_blank">SGA</a>
+                <a class="dropdown-item" href="https://adm.sofyx.app/login/" target="_blank">Sofyx</a>
+                <a class="dropdown-item" href="https://www.appvisto.com/visto/login.faces" target="_blank">APPVisto</a>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button class="btn custom-dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Biblioteca de arquivos 
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://drive.google.com/drive/folders/1TFlmXgHEyvDezXgEBUTYfy-XXRAyGDSb" target="_blank">Regulamento do Associado</a>
+                <a class="dropdown-item" href="https://drive.google.com/drive/folders/1N3yUsJIOsPK_WSItHUykdboMbn-YO-t8" target="_blank">Regulamento interno</a>
+                <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/1Fkw9gRuVHg05DslpufH96nqfLAKDB0T0KQhS7fuSjio/edit#gid=0" target="_blank">Planilha de ramais</a>
+                
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button class="btn custom-dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Abrir chamados
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://docs.google.com/forms/d/e/1FAIpQLScuRzfnmy0883vfQSd85a1aGfmQIccZoXadnUIe88SAr5HUrQ/viewform?usp=sf_link "  target="_blank">Infraestrutura</a>
+                <a class="dropdown-item" href="http://www.alamo.local/intranet/suporte/"  target="_blank">Sistemas</a>
+              </div>
+            </div>
+            
+            <a class="nav-item nav-link" id="inst-menu" href="../institucional/institucional.html">institucional</a>   
+            <a class="nav-item nav-link" id="contact-menu" href="#contact-area">Contato</a>
+            <a class="nav-item nav-link" id="list-menu" href="#">Lista de Cidades</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+    <main>
+     <div id="main_body-title">
+        <h3 class="main-title">LISTA DE CIDADES</h3>
+        <hr id="hr_body-title">
+     </div>   
+        <section class="tabela_container">
+            <div class="filtro_container">
+                <div class="filtro_container_titulo">
+                    <h3><strong>TABELA</strong></h3>
+                </div>
+                <div class="filtro_container_button" id="filtroButtons">
+                  <div class="filtro_container_button-1">
+                     <button class="button1" id="parana">Paraná</button>
+                     <button class="button1" id="metropolitana_poa">RS - METROPOLITANA</button>
+                     <!-- Seletor de Região -->
+                     <button class="button1" id="rj_metropolitana">RJ - METROPOLITANA</button>
+                  </div>
+                  <div class="filtro_container_button-2" id="filtroButtons">
+                     <button class="button1" id="interior_rs">RS - INTERIOR</button>
+                     <button class="button1" id="rj_interior">RJ - Interior</button>
+                     <button class="button1" id="sao_paulo">São Paulo</button>
+                  </div>
+                </div>
+            </div>
+            <div class="resp_excel">
+                <div class="resp_excel_search">
+                    <!--Aqui vai a pesquisa de acordo com as cidades-->
+                    <input type="text" class="search-box" placeholder="Pesquisar..." onkeydown="search()">
+                    <button id="pesquisar" id="pesquisar" onkeydown="search()"></button>
+                  <!-- 
+                    <div class="resp_excel_search_btn">
+                        <a class="search-btn">
+                        </a>
+                        <img class="icone" src="img/icone.png">
+                    </div>
+                    -->
+                </div>
+                <table id="data-table">
+                    <!-- Os dados filtrados serão inseridos aqui -->
+                </table>
+            </div>
+            <div class="filtro_container_footer">
+                <!--Aqui é uma div de estilo-->
+            </div>
+        </section>
+    </main>
+    <script src="./js/lista.js"></script>
+    <footer>
+        <div id="contact-area">
+          <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3 class="main-title">Entre em contato conosco</h3>
+                </div>
+                <div class="col-md-6 contact-box">
+                  <i class="fas fa-phone" id="telefone"></i>
+                  <p><span class="contact-tile">Ligue para ramal:</span> 669</p>
+                  <p><span class="contact-tile">Horários:</span> 9:00 - 18:00</p>
+                </div>
+                <div class="col-md-6 contact-box">
+                  <i class="fas fa-envelope"></i>
+                  <p><span class="contact-tile">Envie um email:</span> desenvolvimento@alamobeneficios.com.br</p>
+                </div>
+             
+              
+        <div id="copy-area">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                  <p>Desenvolvido por <a href="#" target="_blank">Alamo Dev</a> &copy; 2023</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

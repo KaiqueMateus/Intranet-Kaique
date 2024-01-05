@@ -1,0 +1,1422 @@
+<?php
+// Função para obter o IP do visitante
+function obterIP() {
+    // Verifica se o IP está vindo de um proxy reverso
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+
+    // Caso não esteja vindo de um proxy reverso, obtém o IP diretamente
+    if (empty($ip)) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
+    return $ip;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-wisdth, initial-scale=1.0">
+  <title>Intranet Álamo</title>
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Scripts (jQuery não pode ser o slim que vem do Boostrap) -->
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
+  <!-- Progress Bar -->
+  <script src="js/progressbar.min.js"></script>
+  <!-- Parallax -->
+  <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container" id="nav-container">
+      <!-- add essa class -->
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <a class="navbar-brand" href="/index.html">
+          <img id="logo" src="img/logolading.png" alt="Logo-alamo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" id="home-menu" href="#"></a>  
+
+            <div class="dropdown">
+              <button class="btn custom-dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sistemas
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://app.powercrm.com.br/" target="_blank">PowerCrm</a>
+                <a class="dropdown-item" href="https://urano.hinova.com.br/sga/sgav4_alamo/v5/login.php" target="_blank">SGA</a>
+                <a class="dropdown-item" href="https://adm.sofyx.app/login/" target="_blank">Sofyx</a>
+                <a class="dropdown-item" href="https://www.appvisto.com/visto/login.faces" target="_blank">APPVisto</a>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button class="btn custom-dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Biblioteca de arquivos 
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://drive.google.com/drive/folders/1TFlmXgHEyvDezXgEBUTYfy-XXRAyGDSb" target="_blank">Regulamento do Associado</a>
+                <a class="dropdown-item" href="https://drive.google.com/drive/folders/1N3yUsJIOsPK_WSItHUykdboMbn-YO-t8" target="_blank">Regulamento interno</a>
+                <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/1Fkw9gRuVHg05DslpufH96nqfLAKDB0T0KQhS7fuSjio/edit#gid=0" target="_blank">Planilha de ramais</a>
+                
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button class="btn custom-dropdown-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Abrir chamados
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://docs.google.com/forms/d/e/1FAIpQLScuRzfnmy0883vfQSd85a1aGfmQIccZoXadnUIe88SAr5HUrQ/viewform?usp=sf_link "  target="_blank">Infraestrutura</a>
+                <a class="dropdown-item" href="http://www.alamo.local/intranet/suporte/"  target="_blank">Sistemas</a>
+              </div>
+            </div>
+            
+            <a class="nav-item nav-link" id="inst-menu" href="../institucional/institucional.html">institucional</a>   
+            <a class="nav-item nav-link" id="contact-menu" href="#contact-area">Contato</a>
+            <a class="nav-item nav-link" id="list-menu" href="./lista/lista.html">Lista de Cidades</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container-fluid">
+      <!-- slider -->
+      <div id="mainSlider" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#mainSlider" data-slide-to="0" class="active"></li>
+          <li data-target="#mainSlider" data-slide-to="1"></li>
+          <li data-target="#mainSlider" data-slide-to="2"></li>
+          <li data-target="#mainSlider" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="img/Dia-feliz---banner (1).png" class="d-block w-100" alt="">
+
+            <!-- tirar classe d-none -->
+
+            <div class="carousel-caption d-md-block">
+              <h2></h2>
+              <p></p>
+              <!-- Link para a pagina de conteudo destino --> <!-- pré pronto para adicionar o botão-->
+              <a href="#" target="_blank" class="main-bt"></a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="img/Sem-Título-1 (4).png" class="d-block w-100" alt="">
+            <div class="carousel-caption d-md-block">
+              
+              <!-- Link para a pagina de conteudo destino -->
+              <a href="https://drive.google.com/drive/folders/1q7y_wBwGPCaeE9Qoc3LsOjv1I3dDV3kJ" target="_blank" class="main-btn">Baixe aqui</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="img/Julho.png" class="d-block w-100" alt="">
+            <div class="carousel-caption d-md-block">
+              <h2></h5>
+              <p></p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="img/divulgação.png" class="d-block w-100 h-150 " alt="">
+            <div class="carousel-caption d-md-block">
+              <h2></h5>
+              <p></p>
+            </div>
+          </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#mainSlider" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#mainSlider" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+      <!-- Sobre a empresa -->
+      <div id="about-area-2">
+        <div class="container">
+            <div class="row">
+              <div class="col-12"> 
+                <h3 class="main-title">Álamo Beneficios</h3>
+              </div>
+              <div class="col-md-6">
+                <img class="img-fluid" src="img/IMG_9876.JPG" alt="Agência hDC">
+              </div>
+              <div class="col-md-6">
+                <h3 class="about-title">Bem-vindo à Intranet da nossa empresa!</h3>
+                <p>Nós da Álamo, prezamos por fornecer um ambiente acolhedor e alegre para todos que de alguma forma participam da nossa história, e isso vai do nosso associado ao nossos colaboradores que fazem de tudo para alcançarmos nossas realizações.</p>
+                <p>Pensando nisso, e sempre tendo esse lema como norte, desenvolvemos a nossa Intranet. Ao desenvolvermos esse espaço, pensamos em como poderíamos fazer um ambiente mais interativo, acolhedor e prático para todos os nossos colaboradores. Vamos buscar sempre novas maneiras de tornar a plataforma ainda mais completa para a satisfação de todos.
+                </p>
+                <p>Por isso, aproveite tudo que essa nova ferramenta estará disponibilizando para você:
+                </p>
+                
+                <ul id="about-list">
+                  <li><i class="fas fa-check"></i> Solicitação de chamados</li>
+                  <li><i class="fas fa-check"></i> Indicar amigos a se associaram a Álamo</li>
+                  <li><i class="fas fa-check"></i> Baixar materiais de Marketing disponíveis para Download</li>
+                  <li><i class="fas fa-check"></i> Saber de todas as novidades</li>
+                  <li><i class="fas fa-check"></i> Relembrar momentos incríveis</li>
+                  <li><i class="fas fa-check"></i>Ficar por dentro de alguns números da nossa associação (Número de associados, colaboradores…).</li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- container indique - form -->
+      <div id="apply-area">
+        <div class="container-fluid">
+          <div class="row">
+           <!--Inicio Formulario-->
+     
+      <form id="subscription-form" data-toggle="validator" role="form" action="https://www.sofyx.app/api/v1/webhook/" method="post">
+        <!--Hidden fields-->
+        <input type="hidden" class="form-control" id="business_token" name="business_token" value="a6bf86b55b150c80bf9670e039ce086de722cfd4">
+        <input type="hidden" class="form-control" id="source" name="source" value="15">
+        <input type="hidden" class="form-control" id="campaign" name="campaign" value="1856">
+        <input type="hidden" class="form-control" id="user" name="user" value="suporte.ti@alamoprotecaoveicular.com.br">
+        <input type="hidden" class="form-control" id="stage" name="stage" value="1">
+        <input type="hidden" class="form-control" id="redirect" name="redirect" value="https://alamoprotecaoveicular.com.br/obrigado/">
+        <input type="hidden" name="field_r" id="field_r" value="<?php echo obterIP(); ?>">
+
+
+
+        <p>Preencha o formulário e concorra a prêmios incriveis</p>
+        
+        <div class="form-group">
+            <label for="name">Nome do amigo</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+        </div>
+        
+        <div class="form-group ">
+            <label for="telephone">Telefone do amigo</label>
+            <input type="text" class="form-control" id="telephone_main" name="telephone_main" placeholder="Telefone">
+        </div>
+
+        <div class="form-group" id="nome-indicador">
+            <label for="campo-e">Seu nome</label>
+            <input type="text" class="form-control" id="field_e" name="field_e" placeholder="Nome indicador">
+        </div>
+        <div class="form-group">
+          <label for="campo-f">Seu CPF</label>
+          <input type="text" class="form-control" id="field_f" name="field_f" placeholder="Cpf indicador">
+        </div>
+          <input type="submit" class="btn" id="btn-submit" value="Quero me inscrever" />
+        </form>
+      </div>            
+     </div>
+    </div>
+   </div>
+     
+      <!-- Time -->
+      <div id="team-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h3 class="main-title">Nosso time</h3>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 10.png" class="card-img-top" alt="Imagem de Perfil 1">
+                <div class="card-body">
+                  <h5 class="card-title">Recepção</h5>
+                  <p class="card-text">Software Developer</p>
+                  <!--Btn do popup-->
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-1">
+                    saiba mais
+                  </button>     
+                </div>
+                <!--Inicio do popup-->
+                <div class="modal fade" id="modalExemplo-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                
+                       
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 11.png" class="card-img-top" alt="Imagem de Perfil 2">
+                <div class="card-body">
+                  <h5 class="card-title">Recursos Humanos</h5>
+                  <p class="card-text">SEO Consultant</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-2">
+                    saiba mais
+                  </button>                 
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Marcela Landes</td>
+                              <td>617</td>
+                              <td>marcela.landes@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Heber Freitas</td>
+                              <td>636</td>
+                              <td>heber.freitas@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Mônica Carvalho</td>
+                              <td>658</td>
+                              <td>monica.carvalho@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 12.png" class="card-img-top" alt="Imagem de Perfil 3">
+                <div class="card-body">
+                  <h5 class="card-title">T.I</h5>
+                  <p class="card-text">Project Manager</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-3">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Renan </td>
+                              <td>671</td>
+                              <td>suporte.proverit@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 13.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Vistoria</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-4">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Alexandro Pereira</td>
+                              <td>624</td>
+                              <td>alexandro.pereira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Amanda Santos</td>
+                              <td>656</td>
+                              <td>amanda.santos@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Marcelle Santos</td>
+                              <td>657</td>
+                              <td>marcelle.santos@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Hugo Batista</td>
+                              <td>618</td>
+                              <td>hugo.batista@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Nathan Nogueira</td>
+                              <td>97189-1097</td>
+                              <td>nathan.nogueira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Raphael Ventura</td>
+                              <td>97015-3190</td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 14.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Relacionamento </h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-5">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Fernanda Santos</td>
+                              <td>613</td>
+                              <td>fernanda.santos@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Aline Souza</td>
+                              <td>607</td>
+                              <td>aline.souza@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Caroline Franco</td>
+                              <td>663</td>
+                              <td>caroline.franco@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td> Klicia Ferreira</td>
+                              <td>633</td>
+                              <td>klicia.ferreira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Leticia Xavier</td>
+                              <td>616</td>
+                              <td>leticia.xavier@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Larissa Rodrigues</td>
+                              <td>661</td>
+                              <td>larissa.rodrigues@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Raquel Silva</td>
+                              <td>625</td>
+                              <td>raquel.silva@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Adriane Miranda</td>
+                              <td>667</td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 2.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Cobrança</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-6">
+                    saiba mais
+                  </button>
+                </div>
+                <!--Inicio do popup-->
+                <div class="modal fade" id="modalExemplo-6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                      
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 3.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Filiação externa</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-7">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Mônica Kurtz</td>
+                              <td>635</td>
+                              <td>monica.kurtz@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Cinthia Paes</td>
+                              <td>98710-2057</td>
+                              <td>cinthia.paes@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Gisele Oliveira</td>
+                              <td>97016-9855</td>
+                              <td>gisele.oliveira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Jéssica Silva</td>
+                              <td>98296-3485</td>
+                              <td>jessica.silva@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Márcio Júnior</td>
+                              <td>99410-5864</td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Paulo Roberto</td>
+                              <td>98251-2620</td>
+                              <td>paulo.inocencio@alamobeneficios.com.br</td>
+                            </tr>
+                                             
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 4.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Filiação interna</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-8">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Marcelo Ferrari</td>
+                              <td>608</td>
+                              <td>marcelo.ferrari@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Daniele Silva</td>
+                              <td>626</td>
+                              <td>daniele.silva@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Victor Silva</td>
+                              <td>610</td>
+                              <td>victor.silva@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Filipe Freitas</td>
+                              <td>609</td>
+                              <td>filipe.freitas@alamobeneficios.com.br</td>
+                            </tr>
+                          <tr>
+                              <td>Karina Silva</td>
+                              <td>654</td>
+                              <td>karina.silva@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Thayná Alves</td>
+                              <td>601</td>
+                              <td>thayna.alves@alamobeneficios.com.br</td>
+                            </tr>
+                            
+                            <tr>
+                              
+                              <td>Jessica Ribeiro</td>
+                              <td>659</td>
+                              <td>jessica.ribeiro@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Lucas Flôrencio</td>
+                              <td>629</td>
+                              <td>lucas.santos@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Ingrid basilio</td>
+                              <td>665</td>
+                              <td>ingrid.basilio@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 5.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Frota</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-9">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                          
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                              <td>Pedro Moreira</td>
+                              <td>99799-2872</td>
+                              <td>pedro.moreira@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 6.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Geniais</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-10">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                              <td>Edward Vasconcellos</td>
+                              <td>621</td>
+                              <td>edward.vasconcellos@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Sandoval Morais</td>
+                              <td>621</td>
+                              <td>sandoval.morais@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>                              
+                              <td>Veronica Sousa</td>
+                              <td>621</td>
+                              <td>veronica.sousa@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 7.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Jurídico</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-11">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                              <td>Daniel Sant'anna</td>
+                              <td>604</td>
+                              <td>daniel.santanna@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Elias Cardoso</td>
+                              <td>604</td>
+                              <td>elias.cardoso@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 8.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Marketing</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-12">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Thais Gonçalves</td>
+                              <td>620</td>
+                              <td>thais.goncalves@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Matheus Maciel</td>
+                              <td>620</td>
+                              <td>matheus.maciel@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Rafael Brigolini</td>
+                              <td>620</td>
+                              <td>rafael.brigolini@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Ramon Santana</td>
+                              <td>620</td>
+                              <td>ramon.santana@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia 9.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Rastreador</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-13">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-13" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Vanessa Rocha</td>
+                              <td>640</td>
+                              <td>vanessa.rocha@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Lorrany Netto</td>
+                              <td>631</td>
+                              <td>lorrany.netto@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Vivian Martins</td>
+                              <td>615</td>
+                              <td>vivian.martins@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1 cópia.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Cadastro</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-14">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-14" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Carolina Ferreira</td>
+                              <td>600</td>
+                              <td>carolina.ferreira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Yasminne Oliveira</td>
+                              <td>600</td>
+                              <td>yasminne.oliveira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Lethicia Santanna</td>
+                              <td>600</td>
+                              <td>lethicia.santanna@alamobenefios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Thaina Machado</td>
+                              <td>600</td>
+                              <td>thaina.machado@alamobenefios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/Prancheta 1.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">financeiro</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-15">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-15" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Marta Moreira</td>
+                              <td>632</td>
+                              <td>marta.moreira@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Nelio Júnior</td>
+                              <td>603</td>
+                              <td>nelio.junior@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Elinia Costa</td>
+                              <td>603</td>
+                              <td>elinia.costa@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="img/desenvolvimento.png" class="card-img-top" alt="Imagem de Perfil 4">
+                <div class="card-body">
+                  <h5 class="card-title">Dev e Sistemas</h5>
+                  <p class="card-text">UX/UI Designer</p>
+                  <button type="button" class="btn btn-primary" id="btn-prin" data-toggle="modal" data-target="#modalExemplo-16">
+                    saiba mais
+                  </button>
+                </div>
+                 <!--Inicio do popup-->
+                 <div class="modal fade" id="modalExemplo-16" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informações do setor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        
+                      <div class="container-fluid" id="container-tabela">
+                        <table class="table table-borderless" id="tabela"> 
+                          <thead class="cabecalho-tab">
+                            <tr>
+                              
+                              <th>Nome</th>
+                              <th>Ramal</th>
+                              <th>E-mail</th>
+                            </tr>
+                          </thead>
+                          <tbody class="body-tb">
+                            <tr>
+                             
+                              <td>Jonatas Lourenço</td>
+                              <td>669</td>
+                              <td>jonatas.lourenco@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Diago Silva</td>
+                              <td>669</td>
+                              <td>diago.silva@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              
+                              <td>Alexander Fonseca</td>
+                              <td>669</td>
+                              <td>alexander.fonseca@alamobeneficios.com.br</td>
+                            </tr>
+                            <tr>
+                              <td>Kaique Mateus</td>
+                              <td>669</td>
+                              <td>kaique.souza@alamobeneficios.com.br</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-popup" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!--fim do popup -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+       <!--Nossa galeria-->
+
+       <div id="portifolio-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="main-title">Nossas recordações</h3>
+            </div>
+            <div class="col-md-12" id="filter-btn-box">
+              
+              <button class="main-btn filter-btn " id="dia-btn">Dia feliz!</button>
+              <button class="main-btn filter-btn " id="alamo-btn">Alamo</button>
+            </div>
+
+           <!--Nossa galeria 
+
+            "filtro para "inserir imagens alamo"
+            
+            <div class="col-md-4 project-box alamo">
+              <img src="" class="img-fluid" alt="projeto 2">
+            </div>
+            <div class="col-md-4 project-box alamo">
+              <img src="img/fachada-galeria.JPG" class="img-fluid" alt="projeto 2">
+            </div>
+          -->
+     
+            <div class="col-md-4 project-box dia">
+              <img src="img/cadastro.jpg" class="img-fluid" alt="cadastro">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/eventos.jpg" class="img-fluid" alt="eventos">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/filiacaoexterna.jpg" class="img-fluid" alt="filiacaoexterna">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/filiacaointerna.jpg" class="img-fluid" alt="filiacaointerna">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/geniais.jpg" class="img-fluid" alt="geniais">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/juridico.jpg" class="img-fluid" alt="juridico">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/relacionamento.jpg" class="img-fluid" alt="relacionamento">
+            </div>
+            <div class="col-md-4 project-box dia">
+              <img src="img/rh.jpg" class="img-fluid" alt="rh">
+        </div>
+  </div>
+
+  <div class="btn-galeria">
+    <button class="button">
+      <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <a class="text" href="https://drive.google.com/drive/folders/1-Iy8O52O-7HC8svzQAKsbtwkk5Biz4GZ" target="_blank">Veja mais</a>
+    </button>
+  </div>
+
+</div>
+</div>
+
+  </main>
+ <!-- Rodapé -->
+ <footer>
+  <div id="contact-area">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="main-title">Entre em contato conosco</h3>
+          </div>
+          <div class="col-md-6 contact-box">
+            <i class="fas fa-phone"></i>
+            <p><span class="contact-tile">Ligue para ramal:</span> 669</p>
+            <p><span class="contact-tile">Horários:</span> 9:00 - 18:00</p>
+          </div>
+          <div class="col-md-6 contact-box">
+            <i class="fas fa-envelope"></i>
+            <p><span class="contact-tile">Envie um email:</span> desenvolvimento@alamobeneficios.com.br</p>
+          </div>
+       
+        
+  <div id="copy-area">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+            <p>Desenvolvido por <a href="#" target="_blank">Alamo Dev</a> &copy; 2023</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Scripts -->
+<script> src="js/scripts.js"</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./js/script3.js"></script>
+  <!-- Scripts do projeto -->
+  <script src="js/scripts.js"></script>
+</body>
+</html>
